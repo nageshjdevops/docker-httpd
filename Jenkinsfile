@@ -1,6 +1,8 @@
 pipeline {
 
-    agent any
+    agent {
+        label 'dev'
+    }
 
     stages {
 
@@ -27,15 +29,14 @@ pipeline {
                 '''
             }
         }
-
     }
 
     post {
         success {
-            echo 'Deployment Successful'
+            echo 'DEV Deployment Successful'
         }
         failure {
-            echo 'Deployment Failed'
+            echo 'DEV Deployment Failed'
         }
     }
 }
