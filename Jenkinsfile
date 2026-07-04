@@ -1,6 +1,8 @@
 pipeline {
 
-    agent any
+    agent {
+        label 'qa'
+    }
 
     stages {
 
@@ -22,11 +24,11 @@ pipeline {
                 docker rm -f httpd-q1 || true
                 docker run -d --name httpd-q1 -p 8081:80 httpd
                 docker cp index.html httpd-q1:/usr/local/apache2/htdocs/index.html
+                docker exec httpd-q1 chmod 644 /usr/local/apache2/htdocs/index.html
                 docker ps
                 '''
             }
         }
-
     }
 
     post {
